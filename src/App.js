@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { Route, Switch } from 'react-router-dom' ;
+import DarkMode from './components/DarkMode.js'
+import About from './pages/About';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
+import Works from './pages/Works';
 
-function App() {
+const App = () => {
+  const [darkMode, setDarkmode] = useState(false)
+
+  useEffect(() => {
+    const isDark = JSON.parse(localStorage.getItem("themePreference"))
+    if (isDark !== undefined && isDark !== null) {
+      setDarkmode(isDark)
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setDarkmode(true)
+    }
+  },[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DarkMode.Provider value={{
+      darkMode,
+      toogleMode: () => {
+        localStorage.setItem("themePreference", String(!darkMode))
+        setDarkmode(!darkMode)
+      }
+    }}
+    >
+
+      <Switch>
+      <Route exact path='/' component={Home}/>
+        <Route exact path='/about' component={About}/>
+        <Route exact path='/works' component={Works}/>
+        <Route path='/works/:project' component={Works}/>
+        <Route path='/' component={NotFound}/>
+      </Switch>
+    </DarkMode.Provider>
   );
-}
+};
+
+
 
 export default App;
