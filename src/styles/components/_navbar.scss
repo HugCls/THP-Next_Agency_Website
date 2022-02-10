@@ -1,0 +1,100 @@
+.navbar{
+
+    display: flex;
+    flex-flow:row wrap;
+    justify-content: space-between;
+    align-items:baseline;
+    padding: 40px 60px;
+    border: solid 1px;
+    border-radius: 4px;
+    margin-top: 1;
+  
+    .navbar-left{
+      display:flex;
+      flex-direction: row;
+      align-items: baseline;
+      @media (max-width:800px){
+        flex-direction: column;
+        align-items: flex-start;
+      }
+  
+      i{
+        font-size: 4rem;
+        color: $primary-color;
+      }
+  
+  
+      h1{
+        margin: 0 20px;
+        padding: 0;
+      }
+  
+      .nav-link{
+        text-decoration: none;
+        font-size: 22px;
+        color: $primary-color;
+        margin-left:50px;
+        position: relative;
+        transition: 0.5s ease-in-out;
+        letter-spacing: 0.05rem;
+        z-index: 1;
+  
+        &::after{
+          content: "";
+          width: 0%;
+          height: 3px;
+          background-color: $primary-color;
+          position: absolute;
+          bottom: -5%;
+          left:-5%;
+          z-index: -1;
+          transition: 1s ease-in-out;
+          
+        }
+          &::before{
+          content: "";
+          width: 0%;
+          height: 3px;
+          background-color: $primary-color;
+          position: absolute;
+          top: -5%;
+          right:-5%;
+          z-index: -1;
+          transition: 1s ease-in-out;
+          border-radius: 5px;
+        }
+  
+        &:hover{
+          color: $secondary-color-dark;
+          &::after{
+            animation: 1s link ease-in both;
+          }
+          &::before{
+            animation: 1s link ease-in both;
+          }
+  
+          @keyframes link {
+            0% {width:0%;height: 3px;}
+            50%{width: 110%;height: 3px;}
+            90%{width:110%;height: 110%;border-radius: 0px;}
+            100%{width:110%;height: 110%;border-radius: 5px;}
+          }
+        }
+  
+      }
+  
+      .nav-link-active{
+        color: $secondary-color-dark;
+  
+        &::after{
+          content: "";
+          width: 110%;
+          height: 110%;
+          background-color: $primary-color;
+          position: absolute;
+          z-index: -1;
+          border-radius: 5px;
+        }
+      }
+    }
+  }

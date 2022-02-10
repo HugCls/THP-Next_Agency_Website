@@ -1,0 +1,19 @@
+.theme-btn{
+    cursor: pointer;
+    border-radius:50px;
+    padding: 5px 10px;
+    transition: 1s ease-in-out;
+    z-index: 2;
+  
+    &:hover{
+      background-color: $primary-color;
+      color: $secondary-color-dark;
+    }
+  
+    &.dark{
+      color: $secondary-color-dark;
+      &:hover{
+        color: $secondary-color;
+      }
+    }
+  }
